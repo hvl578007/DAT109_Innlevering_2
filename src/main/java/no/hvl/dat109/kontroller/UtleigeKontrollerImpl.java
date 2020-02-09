@@ -3,6 +3,7 @@ package no.hvl.dat109.kontroller;
 import no.hvl.dat109.ui.UtleigeUI;
 import no.hvl.dat109.ui.UtleigeUITekstEnkel;
 import no.hvl.dat109.utleige.Bil;
+import no.hvl.dat109.utleige.Soek;
 import no.hvl.dat109.utleige.Utleigekontor;
 import no.hvl.dat109.utleige.Utleigeselskap;
 
@@ -44,6 +45,16 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
     public void opprettKontor() {
         Utleigekontor kontor = ui.lagKontorMedInfo();
         this.selskap.leggTilKontor(kontor);
+    }
+
+    @Override
+    public void soek() {
+        Soek soek = ui.lesInnSoek();
+
+        soek.gjerEitSoek(this.selskap);
+
+        ui.visSoekResultat(soek);
+
     }
 
     

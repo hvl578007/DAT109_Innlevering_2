@@ -52,7 +52,12 @@ public class Utleigeselskap {
         kontor.leggTilBil(bil);
     }
 
-    private Utleigekontor finnKontor(int kontorNr) {
+    /**
+     * Finn eit kontor med det gitte kontornummeret
+     * @param kontorNr
+     * @return kontoret
+     */
+    public Utleigekontor finnKontor(int kontorNr) {
         //TODO gjer noko betre her...
         return this.kontorListe.get(kontorNr-1);
     }

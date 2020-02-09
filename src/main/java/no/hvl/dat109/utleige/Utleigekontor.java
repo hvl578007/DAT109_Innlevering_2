@@ -1,7 +1,10 @@
 package no.hvl.dat109.utleige;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import no.hvl.dat109.Adresse;
 
@@ -41,6 +44,23 @@ public class Utleigekontor {
     public void leggTilBil(Bil bil) {
         this.bilar.add(bil);
     }
+
+    /**
+     * Finn dei ledige utleigegruppene på bilane til kontoret
+     * @return ein mengde av gruppene som er ledige
+     */
+    public List<Character> finnLedigeUtleigeGrupper() {
+        
+        List<Character> ledigeGrupper;
+
+        ledigeGrupper = bilar.stream()
+                            .filter(Bil::isErLedig)
+                            .map(b -> b.getUtleigeGruppe())
+                            .distinct()
+                            .collect(Collectors.toList());
+
+		return ledigeGrupper;
+	}
 
     //getters/setters
 
@@ -85,4 +105,5 @@ public class Utleigekontor {
     public static void setKontornummerLoepande(int kontornummerLoepande) {
         Utleigekontor.kontornummerLoepande = kontornummerLoepande;
     }
+
 }

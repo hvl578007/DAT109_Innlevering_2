@@ -1,7 +1,10 @@
 package no.hvl.dat109.ui;
 
+import java.time.LocalDateTime;
+
 import no.hvl.dat109.Adresse;
 import no.hvl.dat109.utleige.Bil;
+import no.hvl.dat109.utleige.Soek;
 import no.hvl.dat109.utleige.Utleigekontor;
 import no.hvl.dat109.utleige.Utleigeselskap;
 
@@ -62,9 +65,23 @@ public interface UtleigeUI {
 	public Utleigeselskap lagSelskapMedInfo();
 
     /**
-     * Leg inn eit kontornummer. //TODO evt berre bruke lesInnInteger?
-     * @return
+     * Leg inn eit kontornummer
+     * @return kontornummeret
      */
 	public int lesInnKontorNr();
+
+    /**
+     * Les inn info om eit søk og opprettar eit nytt søke-objekt
+     * @return søk-objekt
+     */
+	public Soek lesInnSoek();
+
+    /**
+     * Visar resultat av eit søk
+     * @param soek
+     */
+    public void visSoekResultat(Soek soek);
+    
+    public LocalDateTime lesInnDatoTid();
 
 }

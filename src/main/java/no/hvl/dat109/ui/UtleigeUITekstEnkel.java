@@ -1,9 +1,13 @@
 package no.hvl.dat109.ui;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import no.hvl.dat109.Adresse;
 import no.hvl.dat109.utleige.Bil;
+import no.hvl.dat109.utleige.Soek;
 import no.hvl.dat109.utleige.Utleigekontor;
 import no.hvl.dat109.utleige.Utleigeselskap;
 
@@ -45,32 +49,72 @@ public class UtleigeUITekstEnkel implements UtleigeUI {
 
     @Override
     public Adresse lagAdresseMedInfo() {
-        // TODO Auto-generated method stub
-        return null;
+        String gateadresse = this.lesInnString("Gateadresse:");
+        String postnummer = this.lesInnString("Postnummer");
+        String poststad = this.lesInnString("Poststad");
+
+        Adresse adresse = new Adresse(gateadresse, postnummer, poststad);
+        return adresse;
     }
 
     @Override
     public Bil lagBilMedInfo() {
-        // TODO Auto-generated method stub
-        return null;
+        String regnr = lesInnString("Regnr:");
+        String merke = lesInnString("Merke:");
+        String modell = lesInnString("Modell:");
+        String farge = lesInnString("Farge:");
+        char utleigeGruppe = lesInnChar("Utleigegruppe:");
+        Bil bil = new Bil(regnr, merke, modell, farge, utleigeGruppe);
+        return bil;
     }
 
     @Override
     public Utleigekontor lagKontorMedInfo() {
-        // TODO Auto-generated method stub
-        return null;
+        Adresse adresse = this.lagAdresseMedInfo();
+        String tlf = lesInnString("Telefonnummer:");
+        Utleigekontor kontor = new Utleigekontor(adresse, tlf);
+        return kontor;
     }
 
     @Override
     public Utleigeselskap lagSelskapMedInfo() {
-        // TODO Auto-generated method stub
-        return null;
+        Adresse adresse = this.lagAdresseMedInfo();
+        String namn = lesInnString("Namn på selskap:");
+        String tlf = lesInnString("Telefonnummer:");
+        Utleigeselskap selskap = new Utleigeselskap(namn, tlf, adresse);
+        return selskap;
     }
 
     @Override
     public int lesInnKontorNr() {
-        // TODO Auto-generated method stub
-        return 0;
+        int nr = this.lesInnInteger("Skriv inn kontornr:");
+        return nr;
+    }
+
+    @Override
+    public Soek lesInnSoek() {
+        int kontorNr = this.lesInnKontorNr();
+        LocalDateTime datoTidUtleige = this.lesInnDatoTid();
+        int talPaaDagar = this.lesInnInteger("Tal på dagar:");
+        Soek soek = new Soek(kontorNr, datoTidUtleige, talPaaDagar);
+        return soek;
+    }
+
+    @Override
+    public void visSoekResultat(Soek soek) {
+        List<String> res = soek.getResultat();
+        String ut = "";
+        for (String r : res) {
+            ut += r + "\n";
+        }
+        this.skrivUt(ut);
+    }
+
+    @Override
+    public LocalDateTime lesInnDatoTid() {
+        String tidStr = lesInnString("Skriv inn dato/tid:, ISO-format");
+        LocalDateTime tid = LocalDateTime.parse(tidStr);
+        return tid;
     }
 
     

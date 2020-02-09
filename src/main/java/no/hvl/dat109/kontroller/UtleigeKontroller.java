@@ -16,4 +16,11 @@ public interface UtleigeKontroller {
      * Kontor-info blir spurt via UI
      */
     public void opprettKontor();
+
+    /**
+     * Gjer eit søk i systemet\n
+     * diverse info om søket blir lagra i eit objekt og spurt via UI
+     */
+    public void soek();
+
 }
