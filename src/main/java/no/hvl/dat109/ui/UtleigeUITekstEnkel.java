@@ -44,25 +44,25 @@ public class UtleigeUITekstEnkel implements UtleigeUI {
     }
 
     @Override
-    public Adresse lagNyAdresseMedInfo() {
+    public Adresse lagAdresseMedInfo() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Bil lagNyBilMedInfo() {
+    public Bil lagBilMedInfo() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Utleigekontor lagNyttKontorMedInfo() {
+    public Utleigekontor lagKontorMedInfo() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Utleigeselskap lagNyttSelskapMedInfo() {
+    public Utleigeselskap lagSelskapMedInfo() {
         // TODO Auto-generated method stub
         return null;
     }

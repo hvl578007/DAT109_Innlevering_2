@@ -20,7 +20,7 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
      */
     public UtleigeKontrollerImpl() {
         ui = new UtleigeUITekstEnkel();
-        this.selskap = ui.lagNyttSelskapMedInfo();
+        this.selskap = ui.lagSelskapMedInfo();
     }
 
     /**
@@ -35,14 +35,14 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
     @Override
     public void opprettBilPaaKontor() {
         int kontorNr = ui.lesInnKontorNr();
-        Bil bil = ui.lagNyBilMedInfo();
+        Bil bil = ui.lagBilMedInfo();
 
         selskap.leggTilBilPaaKontor(kontorNr, bil);
     }
 
     @Override
     public void opprettKontor() {
-        Utleigekontor kontor = ui.lagNyttKontorMedInfo();
+        Utleigekontor kontor = ui.lagKontorMedInfo();
         this.selskap.leggTilKontor(kontor);
     }
 

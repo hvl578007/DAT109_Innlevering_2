@@ -41,25 +41,25 @@ public interface UtleigeUI {
      * Lagar ei ny adresse og spør om info til denne
      * @return adressa
      */
-    public Adresse lagNyAdresseMedInfo();
+    public Adresse lagAdresseMedInfo();
 
     /**
      * Lagar ein ny bil og spør om info til denne
      * @return bilen
      */
-    public Bil lagNyBilMedInfo();
+    public Bil lagBilMedInfo();
 
     /**
      * Lagar eit nytt kontor og spør om info til denne
      * @return kontoret
      */
-    public Utleigekontor lagNyttKontorMedInfo();
+    public Utleigekontor lagKontorMedInfo();
 
     /**
      * Lagar eit nytt selskap og spør om info til denne
      * @return selskapet
      */
-	public Utleigeselskap lagNyttSelskapMedInfo();
+	public Utleigeselskap lagSelskapMedInfo();
 
     /**
      * Leg inn eit kontornummer. //TODO evt berre bruke lesInnInteger?
