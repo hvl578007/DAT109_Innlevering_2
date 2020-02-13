@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 import no.hvl.dat109.Adresse;
 import no.hvl.dat109.utleige.Bil;
+import no.hvl.dat109.utleige.Resultat;
 import no.hvl.dat109.utleige.Soek;
 import no.hvl.dat109.utleige.Utleigekontor;
 import no.hvl.dat109.utleige.Utleigeselskap;
@@ -102,10 +103,10 @@ public class UtleigeUITekstEnkel implements UtleigeUI {
 
     @Override
     public void visSoekResultat(Soek soek) {
-        List<String> res = soek.getResultat();
+        List<Resultat> res = soek.getResultat();
         String ut = "";
-        for (String r : res) {
-            ut += r + "\n";
+        for (Resultat r : res) {
+            ut += r.toString() + "\n";
         }
         this.skrivUt(ut);
     }

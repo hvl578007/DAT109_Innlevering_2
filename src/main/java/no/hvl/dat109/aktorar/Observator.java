@@ -16,6 +16,8 @@ public class Observator {
         Utleigeselskap utleigeselskap = new Utleigeselskap("testbil", "00000000", new Adresse("testvegen 1", "1234", "fiktiv"));
         UtleigeKontroller kontroller = new UtleigeKontrollerImpl(utleigeselskap);
         
+        //observatør startar metodar på kontroller
+
         Sjef sjef = new Sjef(kontroller);
         sjef.start();
 

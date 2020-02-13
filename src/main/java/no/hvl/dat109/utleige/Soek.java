@@ -3,7 +3,6 @@ package no.hvl.dat109.utleige;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Definerar ein klasse for søk
@@ -15,7 +14,7 @@ public class Soek {
     private LocalDateTime datoTidUtleige;
     private int talPaaDagar;
 
-    private List<String> resultat; //TODO eigen klasse??!?!
+    private List<Resultat> resultat; //TODO eigen klasse??!?!
 
     public Soek(int kontorNr, LocalDateTime datoTidUtleige, int talPaaDagar) {
         this.kontorNr = kontorNr;
@@ -31,48 +30,19 @@ public class Soek {
         Utleigekontor kontor = selskap.finnKontor(this.kontorNr);
         List<Character> ledigeGrupper = kontor.finnLedigeUtleigeGrupper();
 
-        setResultat(ledigeGrupper);
+        opprettResultat(ledigeGrupper);
     }
 
-    public void setResultat(List<Character> ledigeGrupper) {
-        this.resultat = ledigeGrupper.stream()
-                        .map(lG -> "Bilutleigegruppe: " + lG.toString() + " er ledig. Pris: " + (talPaaDagar*finnPris(lG)))
-                        .collect(Collectors.toList());
+    public void opprettResultat(List<Character> ledigeGrupper) {
+
+        this.resultat = new ArrayList<>();
+
+        for (Character gruppe : ledigeGrupper) {
+            Resultat res = new Resultat(gruppe);
+            resultat.add(res);
+        }
 
         //TODO... lag ein resultatklasse slik at ein kan kople saman pris og gruppe!!!
-    }
-
-    //TODO denne må ein annan plass, (resultat-klasse? idk), finn på noko!!!
-    private int finnPris(char gruppe) {
-
-        int pris = 0;
-
-        switch (gruppe) {
-            case 'A':
-                pris = 200;
-                break;
-            
-            case 'B':
-                pris = 300;
-                break;
-
-            case 'C':
-                pris = 400;
-                break;
-
-            case 'D':
-                pris = 500;
-                break;
-        
-            default:
-                pris = 100;
-                break;
-        }
-        return pris;
-    }
-
-    public List<String> getResultat() {
-        return this.resultat;
     }
 
     public int getKontorNr() {
@@ -97,5 +67,13 @@ public class Soek {
 
     public void setTalPaaDagar(int talPaaDagar) {
         this.talPaaDagar = talPaaDagar;
+    }
+
+    public List<Resultat> getResultat() {
+        return resultat;
+    }
+
+    public void setResultat(List<Resultat> resultat) {
+        this.resultat = resultat;
     }
 }

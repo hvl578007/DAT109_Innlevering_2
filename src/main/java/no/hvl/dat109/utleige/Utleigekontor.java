@@ -47,7 +47,7 @@ public class Utleigekontor {
 
     /**
      * Finn dei ledige utleigegruppene på bilane til kontoret
-     * @return ein mengde av gruppene som er ledige
+     * @return ei liste av gruppene som er ledige
      */
     public List<Character> finnLedigeUtleigeGrupper() {
         
@@ -55,8 +55,9 @@ public class Utleigekontor {
 
         ledigeGrupper = bilar.stream()
                             .filter(Bil::isErLedig)
-                            .map(b -> b.getUtleigeGruppe())
+                            .map(Bil::getUtleigeGruppe)
                             .distinct()
+                            .sorted()
                             .collect(Collectors.toList());
 
 		return ledigeGrupper;
