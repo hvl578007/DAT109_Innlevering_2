@@ -5,6 +5,8 @@ package no.hvl.dat109.kontroller;
  */
 public interface UtleigeKontroller {
 
+    //TODO lage 
+
     /**
      * Oppretter ein ny bil på eit kontor\n
      * Bil-info og kontor-nr blir spurt via UI

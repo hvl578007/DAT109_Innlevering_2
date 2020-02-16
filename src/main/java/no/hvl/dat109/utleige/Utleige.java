@@ -44,6 +44,16 @@ public class Utleige {
         this.harLevert = false;
     }
 
+    /**
+     * Lagar ein simpel rekning
+     * @return kopi av rekningen
+     */
+    public String genererRekning() {
+        String rekning = "Det har blitt trukke " + this.reservasjon.getPris() + " kr på kortet: " + this.kortnummer;
+        this.rekning = rekning;
+        return rekning; 
+    }
+
     public String getKortnummer() {
         return kortnummer;
     }

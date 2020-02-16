@@ -72,7 +72,7 @@ public class Utleigekontor {
         List<Reservasjon> reservasjonar = kunde.getReservasjonar();
 
         return reservasjonar.stream()
-                    .filter(r -> r.getKontorNr() == this.kontornummer && !r.isHarHenta())
+                    .filter(r -> !r.isHarHenta() && r.getKontorNr() == this.kontornummer)
                     .findFirst().orElse(null);
     }
 
@@ -90,6 +90,34 @@ public class Utleigekontor {
         
         bil.setErLedig(false);
         return bil;
+    }
+
+    /**
+     * Finn ein tilfeldig utleige på ein kunde som ikkje er levert
+     * @param kunde
+     * @return utleigen
+     */
+    public Utleige finnUtleigePaaKunde(Kunde kunde) {
+        List<Utleige> utleigar = kunde.getUtleigar();
+
+        return utleigar.stream()
+                    .filter(u -> !u.isHarLevert() && u.getReservasjon().getKontorNr() == this.kontornummer)
+                    .findAny().orElse(null);
+    }
+
+    /**
+     * Finn ein utleige på ein kunde med regnr som ikkje er levert
+     * @param kunde
+     * @param regnr
+     * @return
+     */
+    public Utleige finnUtleigePaaKunde(Kunde kunde, String regnr) {
+        List<Utleige> utleigar = kunde.getUtleigar();
+
+        return utleigar.stream()
+                    .filter(u -> !u.isHarLevert() && u.getReservasjon().getKontorNr() == this.kontornummer)
+                    .filter(u -> u.getBil().getRegistreringsnummer().equals(regnr))
+                    .findAny().orElse(null);
     }
 
     public int getKontornummer() {

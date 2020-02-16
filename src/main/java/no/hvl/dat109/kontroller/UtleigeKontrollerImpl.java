@@ -121,8 +121,24 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
 
     @Override
     public void leverBil() {
-        // TODO Auto-generated method stub
+        // TODO husk å sjekke ting om dei er null!
+        String tlf = ui.lesInnTlfNr();
+        int kontorNr = ui.lesInnKontorNr();
+        
+        Utleigekontor kontor = selskap.finnKontor(kontorNr);
+        Kunde kunde = selskap.finnKunde(tlf);
+        Utleige utleige = kontor.finnUtleigePaaKunde(kunde);
 
+        utleige.getBil().setErLedig(true);
+        
+        int nyKm = utleige.getBil().simulerKoeyrd();
+        utleige.setKilometerEtter(nyKm);
+
+        LocalDateTime datoTidRetur = ui.lesInnDatoTid();
+        utleige.setDatoTidRetur(datoTidRetur);
+
+        String rekning = utleige.genererRekning();
+        ui.skrivUt(rekning);
     }
 
     public Soek getSoek() {
