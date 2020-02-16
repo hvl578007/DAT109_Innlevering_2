@@ -60,7 +60,7 @@ public class Utleigeselskap {
         //TODO gjer noko betre her...?
         return this.kontorListe.stream()
                             .filter(k -> k.getKontornummer() == kontorNr)
-                            .findAny().get();
+                            .findAny().orElse(null);
         //return this.kontorListe.get(kontorNr-1);
     }
 
@@ -70,7 +70,19 @@ public class Utleigeselskap {
      */
     public void leggTilKunde(Kunde kunde) {
         this.kundar.add(kunde);
-	}
+    }
+    
+    /**
+     * Finn ein kunde gitt eit telefonnummer
+     * @param tlf
+     * @return kunden
+     */
+    public Kunde finnKunde(String tlf) {
+        //TODO gjer noko betre?
+        return this.kundar.stream()
+                .filter(k -> k.getTelefonnummer().equals(tlf))
+                .findFirst().orElse(null);
+    }
 
     public String getNamn() {
         return namn;

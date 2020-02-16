@@ -63,7 +63,34 @@ public class Utleigekontor {
 		return ledigeGrupper;
 	}
 
-    //getters/setters
+    /**
+     * Finn ein tilfeldig (den første) reservasjon på ein kunde på dette kontoret
+     * @param kunde
+     * @return reservasjonen
+     */
+    public Reservasjon finnReservasjonPaaKunde(Kunde kunde) {
+        List<Reservasjon> reservasjonar = kunde.getReservasjonar();
+
+        return reservasjonar.stream()
+                    .filter(r -> r.getKontorNr() == this.kontornummer && !r.isHarHenta())
+                    .findFirst().orElse(null);
+    }
+
+    /**
+     * Leigar ut ein ledig bil på den gitte gruppa
+     * @param UtleigeGruppe
+     * @return bilen
+     */
+    public Bil leigUtBil(char utleigeGruppe) {
+        //TODO burde gje betre bil om det ikkje er noko ledige i den gruppa igjen
+        Bil bil = this.bilar.stream()
+                .filter(b -> b.getUtleigeGruppe() == utleigeGruppe)
+                .filter(Bil::isErLedig)
+                .findAny().orElse(null);
+        
+        bil.setErLedig(false);
+        return bil;
+    }
 
     public int getKontornummer() {
         return kontornummer;

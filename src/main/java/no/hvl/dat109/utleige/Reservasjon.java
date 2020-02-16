@@ -14,6 +14,8 @@ public class Reservasjon {
     private int pris;
     private char utleigeGruppe;
 
+    private boolean harHenta;
+
     /**
      * Lagar ein ny reservasjon
      * @param kontorNr
@@ -28,6 +30,7 @@ public class Reservasjon {
         this.talPaaDagar = talPaaDagar;
         this.pris = pris;
         this.utleigeGruppe = utleigeGruppe;
+        this.harHenta = false;
     }
 
     public int getKontorNr() {
@@ -68,6 +71,14 @@ public class Reservasjon {
 
     public void setUtleigeGruppe(char utleigeGruppe) {
         this.utleigeGruppe = utleigeGruppe;
+    }
+
+    public boolean isHarHenta() {
+        return harHenta;
+    }
+
+    public void setHarHenta(boolean harHenta) {
+        this.harHenta = harHenta;
     }
 
     

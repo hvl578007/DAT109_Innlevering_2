@@ -1,12 +1,16 @@
 package no.hvl.dat109.kontroller;
 
 import no.hvl.dat109.utleige.Kunde;
+
+import java.time.LocalDateTime;
+
 import no.hvl.dat109.ui.UtleigeUI;
 import no.hvl.dat109.ui.UtleigeUITekstEnkel;
 import no.hvl.dat109.utleige.Bil;
 import no.hvl.dat109.utleige.Reservasjon;
 import no.hvl.dat109.utleige.Resultat;
 import no.hvl.dat109.utleige.Soek;
+import no.hvl.dat109.utleige.Utleige;
 import no.hvl.dat109.utleige.Utleigekontor;
 import no.hvl.dat109.utleige.Utleigeselskap;
 
@@ -67,6 +71,7 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
 
     @Override
     public void reserver() {
+        //TODO sjekke om resultat != null
         int resNr = ui.lesInnResultatNr(soek);
 
         Resultat resultat = soek.hentResultat(resNr);
@@ -85,7 +90,32 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
 
     @Override
     public void hentBil() {
-        // TODO Auto-generated method stub
+        String tlf = ui.lesInnTlfNr();
+        int kontorNr = ui.lesInnKontorNr();
+        //TODO sjekke om kontor/kunde != null!!!
+        Utleigekontor kontor = selskap.finnKontor(kontorNr);
+        Kunde kunde = selskap.finnKunde(tlf);
+        Reservasjon reservasjon = kontor.finnReservasjonPaaKunde(kunde);
+
+        if (reservasjon != null) {
+            reservasjon.setHarHenta(true);
+            String kortNr = ui.lesInnKortNr();
+            Bil bil = kontor.leigUtBil(reservasjon.getUtleigeGruppe());
+            int km = bil.getKilometerKoeyrd();
+
+            LocalDateTime datoTidUtleige = reservasjon.getDatoTidUtleige();
+            LocalDateTime datoTidForventaRetur = datoTidUtleige.plusDays(reservasjon.getTalPaaDagar());
+
+            Utleige utleige = new Utleige(bil, reservasjon, kortNr, km, datoTidUtleige, datoTidForventaRetur);
+
+            kunde.leggTilUtleige(utleige);
+
+            ui.skrivUtUtleige(utleige);
+        } else {
+            //TODO skriv ut feilmelding!
+            ui.skrivUt("Ingen reservasjon på dette kontoret!");
+        }
+
 
     }
 

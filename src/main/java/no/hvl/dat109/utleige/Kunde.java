@@ -18,6 +18,7 @@ public class Kunde {
     private Adresse adresse;
 
     private List<Reservasjon> reservasjonar;
+    private List<Utleige> utleigar;
 
     /**
      * Opprettar ein ny kunde
@@ -32,6 +33,7 @@ public class Kunde {
         this.telefonnummer = telefonnummer;
         this.adresse = adresse;
         this.reservasjonar = new ArrayList<>();
+        this.utleigar = new ArrayList<>();
     }
 
     /**
@@ -40,7 +42,15 @@ public class Kunde {
      */
 	public void leggTilReservasjon(Reservasjon reservasjon) {
         this.reservasjonar.add(reservasjon);
-	}
+    }
+    
+    /**
+     * Legg til ein utleige på ein kunde
+     * @param utleige
+     */
+    public void leggTilUtleige(Utleige utleige) {
+        this.utleigar.add(utleige);
+    }
 
     public String getFornamn() {
         return fornamn;
@@ -80,6 +90,14 @@ public class Kunde {
 
     public void setReservasjonar(List<Reservasjon> reservasjonar) {
         this.reservasjonar = reservasjonar;
+    }
+
+    public List<Utleige> getUtleigar() {
+        return utleigar;
+    }
+
+    public void setUtleigar(List<Utleige> utleigar) {
+        this.utleigar = utleigar;
     }
 
     

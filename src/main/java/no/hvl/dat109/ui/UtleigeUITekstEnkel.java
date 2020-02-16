@@ -11,6 +11,7 @@ import no.hvl.dat109.utleige.Bil;
 import no.hvl.dat109.utleige.Reservasjon;
 import no.hvl.dat109.utleige.Resultat;
 import no.hvl.dat109.utleige.Soek;
+import no.hvl.dat109.utleige.Utleige;
 import no.hvl.dat109.utleige.Utleigekontor;
 import no.hvl.dat109.utleige.Utleigeselskap;
 
@@ -67,7 +68,8 @@ public class UtleigeUITekstEnkel implements UtleigeUI {
         String modell = lesInnString("Modell:");
         String farge = lesInnString("Farge:");
         char utleigeGruppe = lesInnChar("Utleigegruppe:");
-        Bil bil = new Bil(regnr, merke, modell, farge, utleigeGruppe);
+        int km = lesInnInteger("Kilometer køyrd:");
+        Bil bil = new Bil(regnr, merke, modell, farge, utleigeGruppe, km);
         return bil;
     }
 
@@ -133,9 +135,9 @@ public class UtleigeUITekstEnkel implements UtleigeUI {
     }
 
     @Override
-    public int lesInnTlfNr() {
+    public String lesInnTlfNr() {
         // TODO Auto-generated method stub
-        return 0;
+        return "";
     }
 
     @Override
@@ -146,6 +148,12 @@ public class UtleigeUITekstEnkel implements UtleigeUI {
 
     @Override
     public void skrivUtKundeReservasjon(Kunde kunde, Reservasjon reservasjon) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void skrivUtUtleige(Utleige utleige) {
         // TODO Auto-generated method stub
 
     }

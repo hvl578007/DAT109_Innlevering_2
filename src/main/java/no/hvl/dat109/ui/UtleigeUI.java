@@ -7,6 +7,7 @@ import no.hvl.dat109.utleige.Kunde;
 import no.hvl.dat109.utleige.Bil;
 import no.hvl.dat109.utleige.Reservasjon;
 import no.hvl.dat109.utleige.Soek;
+import no.hvl.dat109.utleige.Utleige;
 import no.hvl.dat109.utleige.Utleigekontor;
 import no.hvl.dat109.utleige.Utleigeselskap;
 
@@ -92,8 +93,10 @@ public interface UtleigeUI {
 
     public void skrivUtKundeReservasjon(Kunde kunde, Reservasjon reservasjon);
 
-    public int lesInnTlfNr();
+    public String lesInnTlfNr();
 
     public String lesInnKortNr();
+
+	public void skrivUtUtleige(Utleige utleige);
 
 }

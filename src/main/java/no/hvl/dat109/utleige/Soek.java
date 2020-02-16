@@ -28,6 +28,7 @@ public class Soek {
      * @param selskap
      */
     public void gjerEitSoek(Utleigeselskap selskap) {
+        //TODO sjekke om kontor != null
         Utleigekontor kontor = selskap.finnKontor(this.kontorNr);
         List<Character> ledigeGrupper = kontor.finnLedigeUtleigeGrupper();
 

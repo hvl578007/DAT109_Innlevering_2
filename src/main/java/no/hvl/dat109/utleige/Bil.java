@@ -1,7 +1,10 @@
 package no.hvl.dat109.utleige;
 
+import java.util.Random;
+
 /**
  * Klasse som definerar ein bil
+ * 
  * @author Stian Grønås
  */
 public class Bil {
@@ -13,6 +16,8 @@ public class Bil {
     private char utleigeGruppe;
     private boolean erLedig;
 
+    private int kilometerKoeyrd;
+
     /**
      * Opprettar ein bil
      * @param registreringsnummer
@@ -20,14 +25,26 @@ public class Bil {
      * @param modell
      * @param farge
      * @param utleigeGruppe
+     * @param kilometerKoeyrd
      */
-    public Bil(String registreringsnummer, String merke, String modell, String farge, char utleigeGruppe) {
+    public Bil(String registreringsnummer, String merke, String modell, String farge, char utleigeGruppe, int kilometerKoeyrd) {
         this.registreringsnummer = registreringsnummer;
         this.merke = merke;
         this.modell = modell;
         this.farge = farge;
         this.utleigeGruppe = utleigeGruppe;
         this.erLedig = true;
+        this.kilometerKoeyrd = kilometerKoeyrd;
+    }
+
+    /**
+     * Simulerer at bilen har køyrd noko (random tal frå 1 til 1000)
+     * @return ny km
+     */
+    public int simulerKoeyrd() {
+        Random random = new Random();
+        this.kilometerKoeyrd += random.nextInt(1000)+1;
+        return this.kilometerKoeyrd;
     }
 
     public String getRegistreringsnummer() {
@@ -78,10 +95,12 @@ public class Bil {
         this.erLedig = erLedig;
     }
 
-    @Override
-    public String toString() {
-        return "Bil [erLedig=" + erLedig + ", farge=" + farge + ", merke=" + merke + ", modell=" + modell
-                + ", registreringsnummer=" + registreringsnummer + ", utleigeGruppe=" + utleigeGruppe + "]";
+    public int getKilometerKoeyrd() {
+        return kilometerKoeyrd;
+    }
+
+    public void setKilometerKoeyrd(int kilometerKoeyrd) {
+        this.kilometerKoeyrd = kilometerKoeyrd;
     }
 
 }
