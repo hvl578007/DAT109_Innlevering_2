@@ -3,7 +3,9 @@ package no.hvl.dat109.ui;
 import java.time.LocalDateTime;
 
 import no.hvl.dat109.Adresse;
+import no.hvl.dat109.utleige.Kunde;
 import no.hvl.dat109.utleige.Bil;
+import no.hvl.dat109.utleige.Reservasjon;
 import no.hvl.dat109.utleige.Soek;
 import no.hvl.dat109.utleige.Utleigekontor;
 import no.hvl.dat109.utleige.Utleigeselskap;
@@ -83,5 +85,15 @@ public interface UtleigeUI {
     public void visSoekResultat(Soek soek);
     
     public LocalDateTime lesInnDatoTid();
+
+    public int lesInnResultatNr(Soek soek);
+
+    public Kunde lagKundeMedInfo();
+
+    public void skrivUtKundeReservasjon(Kunde kunde, Reservasjon reservasjon);
+
+    public int lesInnTlfNr();
+
+    public String lesInnKortNr();
 
 }

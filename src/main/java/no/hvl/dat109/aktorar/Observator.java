@@ -18,11 +18,11 @@ public class Observator {
         
         //observatør startar metodar på kontroller
 
-        Sjef sjef = new Sjef(kontroller);
-        sjef.start();
+        //Sjef sjef = new Sjef(kontroller);
+        //sjef.start();
 
 
-        Kunde kunde = new Kunde(kontroller);
-        kunde.start();
+        //Kunde kunde = new Kunde(kontroller);
+        //kunde.start();
     }
 }

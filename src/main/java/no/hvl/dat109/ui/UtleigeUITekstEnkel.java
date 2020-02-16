@@ -6,7 +6,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import no.hvl.dat109.Adresse;
+import no.hvl.dat109.utleige.Kunde;
 import no.hvl.dat109.utleige.Bil;
+import no.hvl.dat109.utleige.Reservasjon;
 import no.hvl.dat109.utleige.Resultat;
 import no.hvl.dat109.utleige.Soek;
 import no.hvl.dat109.utleige.Utleigekontor;
@@ -116,6 +118,36 @@ public class UtleigeUITekstEnkel implements UtleigeUI {
         String tidStr = lesInnString("Skriv inn dato/tid:, ISO-format");
         LocalDateTime tid = LocalDateTime.parse(tidStr);
         return tid;
+    }
+
+    @Override
+    public int lesInnResultatNr(Soek soek) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public Kunde lagKundeMedInfo() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public int lesInnTlfNr() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public String lesInnKortNr() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void skrivUtKundeReservasjon(Kunde kunde, Reservasjon reservasjon) {
+        // TODO Auto-generated method stub
+
     }
 
     

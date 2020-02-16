@@ -1,8 +1,11 @@
 package no.hvl.dat109.kontroller;
 
+import no.hvl.dat109.utleige.Kunde;
 import no.hvl.dat109.ui.UtleigeUI;
 import no.hvl.dat109.ui.UtleigeUITekstEnkel;
 import no.hvl.dat109.utleige.Bil;
+import no.hvl.dat109.utleige.Reservasjon;
+import no.hvl.dat109.utleige.Resultat;
 import no.hvl.dat109.utleige.Soek;
 import no.hvl.dat109.utleige.Utleigekontor;
 import no.hvl.dat109.utleige.Utleigeselskap;
@@ -15,6 +18,9 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
 
     private UtleigeUI ui;
     private Utleigeselskap selskap;
+
+    //anna namn?
+    private Soek soek;
 
     /**
      * Opprettar ein kontroller og spør UI om info om selskapet og opprettar det internt
@@ -55,7 +61,46 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
 
         ui.visSoekResultat(soek);
 
+        this.setSoek(soek);
+
     }
 
+    @Override
+    public void reserver() {
+        int resNr = ui.lesInnResultatNr(soek);
+
+        Resultat resultat = soek.hentResultat(resNr);
+
+        Reservasjon reservasjon = new Reservasjon(soek.getKontorNr(), soek.getDatoTidUtleige(), soek.getTalPaaDagar(), resultat.getPris(), resultat.getUtleigeGruppe());
+
+        Kunde kunde = ui.lagKundeMedInfo();
+
+        kunde.leggTilReservasjon(reservasjon);
+
+        selskap.leggTilKunde(kunde);
+
+        ui.skrivUtKundeReservasjon(kunde, reservasjon);
+
+    }
+
+    @Override
+    public void hentBil() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void leverBil() {
+        // TODO Auto-generated method stub
+
+    }
+
+    public Soek getSoek() {
+        return soek;
+    }
+
+    public void setSoek(Soek soek) {
+        this.soek = soek;
+    }
     
 }

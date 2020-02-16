@@ -14,7 +14,7 @@ public class Soek {
     private LocalDateTime datoTidUtleige;
     private int talPaaDagar;
 
-    private List<Resultat> resultat; //TODO eigen klasse??!?!
+    private List<Resultat> resultat;
 
     public Soek(int kontorNr, LocalDateTime datoTidUtleige, int talPaaDagar) {
         this.kontorNr = kontorNr;
@@ -24,7 +24,8 @@ public class Soek {
     }
 
     /**
-     * Gjer eit søk mot systemet
+     * Gjer eit søk i selskapet
+     * @param selskap
      */
     public void gjerEitSoek(Utleigeselskap selskap) {
         Utleigekontor kontor = selskap.finnKontor(this.kontorNr);
@@ -33,16 +34,28 @@ public class Soek {
         opprettResultat(ledigeGrupper);
     }
 
-    public void opprettResultat(List<Character> ledigeGrupper) {
+    /**
+     * Hentar ut resultatet med det gitte nummeret
+     * @param resNr
+     * @return resultatet
+     */
+    public Resultat hentResultat(int resNr) {
+        return this.resultat.get(resNr-1);
+    }
+
+    /**
+     * Opprettar ei liste med resultat og lagrar det i søket
+     * @param ledigeGrupper
+     */
+    private void opprettResultat(List<Character> ledigeGrupper) {
 
         this.resultat = new ArrayList<>();
 
         for (Character gruppe : ledigeGrupper) {
-            Resultat res = new Resultat(gruppe);
+            Resultat res = new Resultat(gruppe, this.talPaaDagar);
             resultat.add(res);
         }
 
-        //TODO... lag ein resultatklasse slik at ein kan kople saman pris og gruppe!!!
     }
 
     public int getKontorNr() {

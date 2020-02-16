@@ -17,6 +17,7 @@ public class Utleigeselskap {
     private Adresse adresse;
 
     private List<Utleigekontor> kontorListe;
+    private List<Kunde> kundar;
 
     /**
      * Opprettar eit utleigeselskap
@@ -29,10 +30,8 @@ public class Utleigeselskap {
         this.namn = namn;
         this.telefonnummer = telefonnummer;
         this.adresse = adresse;
+        this.kundar = new ArrayList<>();
     }
-
-    //TODO ctor som kontaktar UI for å få inn info automatisk?
-
 
     /**
      * Legg til eit kontor i lista
@@ -58,11 +57,20 @@ public class Utleigeselskap {
      * @return kontoret
      */
     public Utleigekontor finnKontor(int kontorNr) {
-        //TODO gjer noko betre her...
-        return this.kontorListe.get(kontorNr-1);
+        //TODO gjer noko betre her...?
+        return this.kontorListe.stream()
+                            .filter(k -> k.getKontornummer() == kontorNr)
+                            .findAny().get();
+        //return this.kontorListe.get(kontorNr-1);
     }
 
-    //getters/setters
+    /**
+     * Legg til ein kunde på selskapet
+     * @param kunde
+     */
+    public void leggTilKunde(Kunde kunde) {
+        this.kundar.add(kunde);
+	}
 
     public String getNamn() {
         return namn;

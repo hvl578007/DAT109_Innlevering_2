@@ -23,4 +23,22 @@ public interface UtleigeKontroller {
      */
     public void soek();
 
+    /**
+     * Reserverar ein reservasjon og lagrar kundeinfo
+     */
+    public void reserver();
+    //TODO endre til at den returnerer kunde-objektet?! eller i det minste reservasjons-objektet
+
+    /**
+     * Hentar ein bil ved eit kontor
+     */
+    public void hentBil();
+    //TODO endre til at den returnerer kunde-objektet?! eller i det minste utleige-objektet
+
+    /**
+     * Leverer ein bil til eit kontor
+     */
+    public void leverBil();
+    //TODO endre til at den returnerer kunde-objektet?! eller i det minste utleige-objektet
+
 }
