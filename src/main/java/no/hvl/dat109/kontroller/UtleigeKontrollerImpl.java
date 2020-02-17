@@ -49,12 +49,16 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
         Bil bil = ui.lagBilMedInfo();
 
         selskap.leggTilBilPaaKontor(kontorNr, bil);
+
+        //TODO skriv ut bilinfo
     }
 
     @Override
     public void opprettKontor() {
         Utleigekontor kontor = ui.lagKontorMedInfo();
         this.selskap.leggTilKontor(kontor);
+
+        //TODO skriv ut kontorinfo
     }
 
     @Override
@@ -66,7 +70,6 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
         ui.visSoekResultat(soek);
 
         this.setSoek(soek);
-
     }
 
     @Override
