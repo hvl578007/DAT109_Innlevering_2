@@ -81,5 +81,5 @@ public class Reservasjon {
         this.harHenta = harHenta;
     }
 
-    
+    //TODO equals?
 }

@@ -135,6 +135,7 @@ public class UtleigeGUISwing extends JFrame implements ActionListener, WindowLis
 
         } else if ("soekOgReserver".equals(e.getActionCommand())) {
             //TODO
+            
         } else if ("hentBil".equals(e.getActionCommand())) {
             System.out.println("Henter ein bil...");
             kontroller.hentBil();

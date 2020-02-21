@@ -74,6 +74,7 @@ public class Utleigekontor {
         return reservasjonar.stream()
                     .filter(r -> !r.isHarHenta() && r.getKontorNr() == this.kontornummer)
                     .findFirst().orElse(null);
+        //burde setta reservasjon som harhenta her!?
     }
 
     /**
@@ -88,7 +89,7 @@ public class Utleigekontor {
                 .filter(Bil::isErLedig)
                 .findAny().orElse(null);
         
-        bil.setErLedig(false);
+        if(bil != null) bil.setErLedig(false);
         return bil;
     }
 
@@ -103,6 +104,7 @@ public class Utleigekontor {
         return utleigar.stream()
                     .filter(u -> !u.isHarLevert() && u.getReservasjon().getKontorNr() == this.kontornummer)
                     .findAny().orElse(null);
+        //burde setta utleige som harlevert her!?
     }
 
     /**

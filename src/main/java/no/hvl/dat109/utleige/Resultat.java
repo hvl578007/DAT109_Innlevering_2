@@ -11,7 +11,7 @@ public class Resultat {
     private final static int PRIS_GRUPPE_B = 300;
     private final static int PRIS_GRUPPE_C = 400;
     private final static int PRIS_GRUPPE_D = 500;
-    private final static int PRIS_INGEN_GRUPPE = 10000;
+    private final static int PRIS_INGEN_GRUPPE = 1000;
 
     private int pris;
     private char utleigeGruppe;
