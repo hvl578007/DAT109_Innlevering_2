@@ -81,5 +81,11 @@ public class Reservasjon {
         this.harHenta = harHenta;
     }
 
+    @Override
+    public String toString() {
+        return "Reservasjon [datoTidUtleige=" + datoTidUtleige + ", harHenta=" + harHenta + ", kontorNr=" + kontorNr
+                + ", pris=" + pris + ", talPaaDagar=" + talPaaDagar + ", utleigeGruppe=" + utleigeGruppe + "]";
+    }
+
     //TODO equals?
 }

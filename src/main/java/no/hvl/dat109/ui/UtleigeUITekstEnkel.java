@@ -117,8 +117,10 @@ public class UtleigeUITekstEnkel implements UtleigeUI {
 
     @Override
     public LocalDateTime lesInnDatoTid() {
-        String tidStr = lesInnString("Skriv inn dato/tid:, ISO-format");
-        LocalDateTime tid = LocalDateTime.parse(tidStr);
+        //TODO fiks slik at ein kan velje dato? fiks...?
+        //String tidStr = lesInnString("Skriv inn dato/tid:, ISO-format");
+        //LocalDateTime tid = LocalDateTime.parse(tidStr);
+        LocalDateTime tid = LocalDateTime.now();
         return tid;
     }
 
@@ -130,31 +132,32 @@ public class UtleigeUITekstEnkel implements UtleigeUI {
     @Override
     public Kunde lagKundeMedInfo() {
         // TODO Auto-generated method stub
-        return null;
+        String fornamn = lesInnString("Skriv inn fornamn");
+        String etternamn = lesInnString("Skriv inn etternamn");
+        String tlf = lesInnTlfNr();
+        Adresse adresse = lagAdresseMedInfo();
+        Kunde kunde = new Kunde(fornamn, etternamn, tlf, adresse);
+        return kunde;
     }
 
     @Override
     public String lesInnTlfNr() {
-        // TODO Auto-generated method stub
-        return "";
+        return this.lesInnString("Skriv inn tlf:");
     }
 
     @Override
     public String lesInnKortNr() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.lesInnString("Skriv inn kortnr:");
     }
 
     @Override
     public void skrivUtKundeReservasjon(Kunde kunde, Reservasjon reservasjon) {
-        // TODO Auto-generated method stub
-
+        this.skrivUt("Kunde\n" + kunde.toString() + "\nReservasjon:\n" + reservasjon.toString());
     }
 
     @Override
     public void skrivUtUtleige(Utleige utleige) {
-        // TODO Auto-generated method stub
-
+        this.skrivUt("Det har blitt gjort eit utleige:\n" + utleige.toString());
     }
 
     

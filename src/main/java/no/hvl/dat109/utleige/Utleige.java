@@ -134,5 +134,13 @@ public class Utleige {
         this.bil = bil;
     }
 
+    @Override
+    public String toString() {
+        return "Utleige [bilreg=" + bil.getRegistreringsnummer() + ", datoTidForventaRetur=" + datoTidForventaRetur + ", datoTidRetur="
+                + datoTidRetur + ", datoTidUtleige=" + datoTidUtleige + ", harLevert=" + harLevert + ", kilometerEtter="
+                + kilometerEtter + ", kilometerFoer=" + kilometerFoer + ", kortnummer=" + kortnummer + ", rekning="
+                + rekning + "]";
+    }
+
     
 }

@@ -137,16 +137,24 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
         Kunde kunde = selskap.finnKunde(tlf);
         Utleige utleige = kontor.finnUtleigePaaKunde(kunde);
 
-        utleige.getBil().setErLedig(true);
+        if (utleige != null) {
+            utleige.getBil().setErLedig(true);
         
-        int nyKm = utleige.getBil().simulerKoeyrd();
-        utleige.setKilometerEtter(nyKm);
+            int nyKm = utleige.getBil().simulerKoeyrd();
+            utleige.setKilometerEtter(nyKm);
 
-        LocalDateTime datoTidRetur = ui.lesInnDatoTid();
-        utleige.setDatoTidRetur(datoTidRetur);
+            LocalDateTime datoTidRetur = ui.lesInnDatoTid();
+            utleige.setDatoTidRetur(datoTidRetur);
 
-        String rekning = utleige.genererRekning();
-        ui.skrivUt(rekning);
+            utleige.setHarLevert(true);
+
+            String rekning = utleige.genererRekning();
+            ui.skrivUt(rekning);
+        } else {
+            //TODO skriv ut feilmelding!
+            ui.skrivUt("Ingen utleige på dette kontoret!");
+        }
+        
     }
 
     public Soek getSoek() {

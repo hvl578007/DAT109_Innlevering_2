@@ -1,5 +1,8 @@
 package no.hvl.dat109.aktorar;
 
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+
 import no.hvl.dat109.Adresse;
 import no.hvl.dat109.kontroller.UtleigeKontroller;
 import no.hvl.dat109.kontroller.UtleigeKontrollerImpl;
@@ -24,5 +27,13 @@ public class Observator {
 
         //Kunde kunde = new Kunde(kontroller);
         //kunde.start();
+
+        //JOptionPane pane = new JOptionPane();
+        UIManager.put("OptionPane.cancelButtonText", "nope");
+        UIManager.put("OptionPane.okButtonText", "yup");
+        JOptionPane.showInputDialog(null, null, "Skriv inn dato:", JOptionPane.QUESTION_MESSAGE, null, null, "");
+
+        JOptionPane.showInputDialog("hei?");
+        //JOptionPane.showOptionDialog(null, null, "Skriv inn dato:", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"DatoTidNå", "OK"}, "");
     }
 }
