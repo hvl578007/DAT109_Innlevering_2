@@ -162,4 +162,14 @@ public class Utleigekontor {
                 + ", telefonnummer=" + telefonnummer + "]";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        Utleigekontor kontor;
+        if(obj instanceof Utleigekontor) {
+            kontor = (Utleigekontor) obj;
+            return this.getTelefonnummer().equals(kontor.getTelefonnummer());
+        }
+        return false;
+    }
+
 }

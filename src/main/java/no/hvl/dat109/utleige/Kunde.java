@@ -100,5 +100,21 @@ public class Kunde {
         this.utleigar = utleigar;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        Kunde kunde;
+        if(obj instanceof Kunde) {
+            kunde = (Kunde) obj;
+            return this.getTelefonnummer().equals(kunde.getTelefonnummer());
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Kunde [adresse=" + adresse + ", etternamn=" + etternamn + ", fornamn=" + fornamn + ", reservasjonar="
+                + reservasjonar + ", telefonnummer=" + telefonnummer + ", utleigar=" + utleigar + "]";
+    }
+
     
 }

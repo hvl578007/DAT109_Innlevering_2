@@ -1,8 +1,13 @@
 ﻿package no.hvl.dat109;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Test;
 
 import no.hvl.dat109.utleige.Bil;
 import no.hvl.dat109.utleige.Kunde;
@@ -16,12 +21,13 @@ public class UtleigeTest {
 
     //TODO opprett noko selskap + kontor + bilar for å teste diverse i!
     Utleigeselskap selskap;
+    List<Utleigekontor> kontorar;
 
     @Before
     public void oppsett() {
 
         selskap = new Utleigeselskap("Tester", "12345678", new Adresse("Testvegen 1", "1234", "Test"));
-        List<Utleigekontor> kontorar = selskap.getKontorListe();
+        kontorar = selskap.getKontorListe();
 
         Utleigekontor kontor1 = new Utleigekontor(new Adresse("Testvegen 10", "1210", "Testby1"), "11111111");
         Utleigekontor kontor2 = new Utleigekontor(new Adresse("Testvegen 20", "1220", "Testby2"), "22222222");
@@ -62,6 +68,56 @@ public class UtleigeTest {
         Kunde kunde1 = new Kunde("Ola", "Normann", "87654321", new Adresse("Norge1", "0000", "Norgebyen"));
 
         selskap.getKundar().add(kunde1);
+
+    }
+
+    @Test
+    public void testSelskapFinnKontor() {
+        assertEquals(this.kontorar.get(0), selskap.finnKontor(1));
+        assertEquals(this.kontorar.get(1), selskap.finnKontor(2));
+        assertEquals(this.kontorar.get(2), selskap.finnKontor(3));
+        assertNull(selskap.finnKontor(0));
+        assertNull(selskap.finnKontor(4));
+        assertNotEquals(this.kontorar.get(2), selskap.finnKontor(2));
+    }
+
+    @Test
+    public void testSelskapFinnKunde() {
+
+    }
+
+    @Test
+    public void testKontorFinnLedigeUtleigeGrupper() {
+
+    }
+
+    @Test
+    public void testKontorFinnReservasjonPaaKunde() {
+
+    }
+
+    @Test
+    public void testKontorLeigUtBil() {
+
+    }
+
+    @Test
+    public void testKontorFinnUtleigePaaKunde() {
+
+    }
+
+    @Test
+    public void testResultatFinnPris() {
+
+    }
+
+    @Test
+    public void testSoekGjerEitSoek() {
+        //usikker...
+    }
+
+    @Test
+    public void testUtleigeGenererRekning() {
 
     }
 }

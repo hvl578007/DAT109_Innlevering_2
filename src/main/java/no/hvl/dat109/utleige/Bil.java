@@ -109,4 +109,14 @@ public class Bil {
                 + modell + ", registreringsnummer=" + registreringsnummer + ", utleigeGruppe=" + utleigeGruppe + "]";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        Bil bil;
+        if(obj instanceof Bil) {
+            bil = (Bil) obj;
+            return this.getRegistreringsnummer().equals(bil.getRegistreringsnummer());
+        }
+        return false;
+    }
+
 }
