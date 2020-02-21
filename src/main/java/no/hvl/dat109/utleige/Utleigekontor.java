@@ -152,14 +152,14 @@ public class Utleigekontor {
         this.bilar = bilar;
     }
 
-    @Override
-    public String toString() {
-        return "Utleigekontor [kontoradresse=" + kontoradresse + ", kontornummer=" + kontornummer + ", telefonnummer="
-                + telefonnummer + "]";
-    }
-
     public static void setKontornummerLoepande(int kontornummerLoepande) {
         Utleigekontor.kontornummerLoepande = kontornummerLoepande;
+    }
+
+    @Override
+    public String toString() {
+        return "Utleigekontor [bilar=" + bilar + ", kontoradresse=" + kontoradresse + ", kontornummer=" + kontornummer
+                + ", telefonnummer=" + telefonnummer + "]";
     }
 
 }

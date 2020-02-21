@@ -121,4 +121,12 @@ public class Utleigeselskap {
         return "Utleigeselskap [adresse=" + adresse + ", namn=" + namn + ", telefonnummer=" + telefonnummer + "]";
     }
 
+    public List<Kunde> getKundar() {
+        return kundar;
+    }
+
+    public void setKundar(List<Kunde> kundar) {
+        this.kundar = kundar;
+    }
+
 }

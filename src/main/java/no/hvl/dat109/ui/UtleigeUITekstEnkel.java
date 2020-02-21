@@ -124,8 +124,7 @@ public class UtleigeUITekstEnkel implements UtleigeUI {
 
     @Override
     public int lesInnResultatNr(Soek soek) {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.lesInnInteger("Skriv inn resultatnr 1-4");
     }
 
     @Override

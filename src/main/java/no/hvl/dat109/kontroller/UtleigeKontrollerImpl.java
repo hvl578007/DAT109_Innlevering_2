@@ -51,6 +51,7 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
         selskap.leggTilBilPaaKontor(kontorNr, bil);
 
         //TODO skriv ut bilinfo
+        ui.skrivUt("Oppretta bil: " + bil.toString());
     }
 
     @Override
@@ -59,6 +60,7 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
         this.selskap.leggTilKontor(kontor);
 
         //TODO skriv ut kontorinfo
+        ui.skrivUt("Oppretta kontor: " + kontor.toString());
     }
 
     @Override
@@ -74,6 +76,9 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
 
     @Override
     public void reserver() {
+        //VIS RESULTAT!!!
+        ui.visSoekResultat(soek);
+        
         //TODO sjekke om resultat != null
         int resNr = ui.lesInnResultatNr(soek);
 

@@ -103,4 +103,10 @@ public class Bil {
         this.kilometerKoeyrd = kilometerKoeyrd;
     }
 
+    @Override
+    public String toString() {
+        return "Bil [farge=" + farge + ", kilometerKoeyrd=" + kilometerKoeyrd + ", merke=" + merke + ", modell="
+                + modell + ", registreringsnummer=" + registreringsnummer + ", utleigeGruppe=" + utleigeGruppe + "]";
+    }
+
 }
