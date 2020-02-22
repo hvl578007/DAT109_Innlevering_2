@@ -83,26 +83,31 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
 
     @Override
     public void reserver() {
-        //VIS RESULTAT!!!
-        ui.visSoekResultat(soek);
+
+        if (this.soek != null) {
+            ui.visSoekResultat(soek);
         
-        int resNr = ui.lesInnResultatNr(soek);
+            int resNr = ui.lesInnResultatNr(soek);
 
-        Resultat resultat = soek.hentResultat(resNr);
+            Resultat resultat = soek.hentResultat(resNr);
 
-        if (resultat != null) {
-            Reservasjon reservasjon = new Reservasjon(soek.getKontorNr(), soek.getDatoTidUtleige(), soek.getTalPaaDagar(), resultat.getPris(), resultat.getUtleigeGruppe());
+            if (resultat != null) {
+                Reservasjon reservasjon = new Reservasjon(soek.getKontorNr(), soek.getDatoTidUtleige(), soek.getTalPaaDagar(), resultat.getPris(), resultat.getUtleigeGruppe());
 
-            Kunde kunde = ui.lagKundeMedInfo();
+                Kunde kunde = ui.lagKundeMedInfo();
 
-            kunde.leggTilReservasjon(reservasjon);
+                kunde.leggTilReservasjon(reservasjon);
 
-            selskap.leggTilKunde(kunde);
+                selskap.leggTilKunde(kunde);
 
-            ui.skrivUtKundeReservasjon(kunde, reservasjon);
+                ui.skrivUtKundeReservasjon(kunde, reservasjon);
+            } else {
+                ui.skrivUt("Søket hadde ingen resultat! Gjer eit nytt søk på anna kontor!");
+            }
         } else {
-            ui.skrivUt("Søket hadde ingen resultat! Gjer eit nytt søk på anna kontor!");
+            ui.skrivUt("Søke-objektet er tomt! Gjer eit nytt søk.");
         }
+        
 
     }
 
