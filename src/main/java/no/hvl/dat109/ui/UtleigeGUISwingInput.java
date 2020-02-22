@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
 
 import no.hvl.dat109.utleige.Bil;
 import no.hvl.dat109.utleige.Kunde;

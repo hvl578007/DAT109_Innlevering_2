@@ -69,6 +69,7 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
 
         soek.gjerEitSoek(this.selskap);
 
+        //vis resultat?
         ui.visSoekResultat(soek);
 
         this.setSoek(soek);
@@ -79,20 +80,23 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
         //VIS RESULTAT!!!
         ui.visSoekResultat(soek);
         
-        //TODO sjekke om resultat != null
         int resNr = ui.lesInnResultatNr(soek);
 
         Resultat resultat = soek.hentResultat(resNr);
 
-        Reservasjon reservasjon = new Reservasjon(soek.getKontorNr(), soek.getDatoTidUtleige(), soek.getTalPaaDagar(), resultat.getPris(), resultat.getUtleigeGruppe());
+        if (resultat != null) {
+            Reservasjon reservasjon = new Reservasjon(soek.getKontorNr(), soek.getDatoTidUtleige(), soek.getTalPaaDagar(), resultat.getPris(), resultat.getUtleigeGruppe());
 
-        Kunde kunde = ui.lagKundeMedInfo();
+            Kunde kunde = ui.lagKundeMedInfo();
 
-        kunde.leggTilReservasjon(reservasjon);
+            kunde.leggTilReservasjon(reservasjon);
 
-        selskap.leggTilKunde(kunde);
+            selskap.leggTilKunde(kunde);
 
-        ui.skrivUtKundeReservasjon(kunde, reservasjon);
+            ui.skrivUtKundeReservasjon(kunde, reservasjon);
+        } else {
+            ui.skrivUt("Søket hadde ingen resultat! Gjer eit nytt søk på anna kontor!");
+        }
 
     }
 
@@ -100,59 +104,87 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
     public void hentBil() {
         String tlf = ui.lesInnTlfNr();
         int kontorNr = ui.lesInnKontorNr();
-        //TODO sjekke om kontor/kunde != null!!!
         Utleigekontor kontor = selskap.finnKontor(kontorNr);
         Kunde kunde = selskap.finnKunde(tlf);
-        Reservasjon reservasjon = kontor.finnReservasjonPaaKunde(kunde);
 
-        if (reservasjon != null) {
-            reservasjon.setHarHenta(true);
-            String kortNr = ui.lesInnKortNr();
-            Bil bil = kontor.leigUtBil(reservasjon.getUtleigeGruppe());
-            int km = bil.getKilometerKoeyrd();
+        if (kunde != null && kontor != null) {
+            Reservasjon reservasjon = kontor.finnReservasjonPaaKunde(kunde);
 
-            LocalDateTime datoTidUtleige = reservasjon.getDatoTidUtleige();
-            LocalDateTime datoTidForventaRetur = datoTidUtleige.plusDays(reservasjon.getTalPaaDagar());
+            if (reservasjon != null) {
+                reservasjon.setHarHenta(true);
+                String kortNr = ui.lesInnKortNr();
+                Bil bil = kontor.leigUtBil(reservasjon.getUtleigeGruppe());
 
-            Utleige utleige = new Utleige(bil, reservasjon, kortNr, km, datoTidUtleige, datoTidForventaRetur);
+                if (bil != null) {
+                    int km = bil.getKilometerKoeyrd();
 
-            kunde.leggTilUtleige(utleige);
+                    LocalDateTime datoTidUtleige = reservasjon.getDatoTidUtleige();
+                    LocalDateTime datoTidForventaRetur = datoTidUtleige.plusDays(reservasjon.getTalPaaDagar());
 
-            ui.skrivUtUtleige(utleige);
+                    Utleige utleige = new Utleige(bil, reservasjon, kortNr, km, datoTidUtleige, datoTidForventaRetur);
+
+                    kunde.leggTilUtleige(utleige);
+
+                    ui.skrivUtUtleige(utleige);
+                } else {
+                    ui.skrivUt("Ingen ledige bilar nå! Prøv igjen seinare/lever inn ein bil...");
+                }
+                
+            } else {
+                ui.skrivUt("Ingen reservasjon på dette kontoret!");
+            }
         } else {
-            //TODO skriv ut feilmelding!
-            ui.skrivUt("Ingen reservasjon på dette kontoret!");
+
+            if (kontor == null) {
+                ui.skrivUt("Ugyldig kontornr! Prøv på nytt.");
+            }
+
+            if (kunde == null) {
+                ui.skrivUt("Ingen kunde med det telefonnummeret! Prøv på nytt.");
+            }
         }
+        
 
 
     }
 
     @Override
     public void leverBil() {
-        // TODO husk å sjekke ting om dei er null!
         String tlf = ui.lesInnTlfNr();
         int kontorNr = ui.lesInnKontorNr();
         
         Utleigekontor kontor = selskap.finnKontor(kontorNr);
         Kunde kunde = selskap.finnKunde(tlf);
-        Utleige utleige = kontor.finnUtleigePaaKunde(kunde);
-
-        if (utleige != null) {
-            utleige.getBil().setErLedig(true);
         
-            int nyKm = utleige.getBil().simulerKoeyrd();
-            utleige.setKilometerEtter(nyKm);
+        if (kunde != null && kontor != null) {
+            Utleige utleige = kontor.finnUtleigePaaKunde(kunde);
 
-            LocalDateTime datoTidRetur = ui.lesInnDatoTid();
-            utleige.setDatoTidRetur(datoTidRetur);
+            if (utleige != null) {
+                utleige.getBil().setErLedig(true);
+            
+                int nyKm = utleige.getBil().simulerKoeyrd();
+                utleige.setKilometerEtter(nyKm);
 
-            utleige.setHarLevert(true);
+                LocalDateTime datoTidRetur = ui.lesInnDatoTid();
+                utleige.setDatoTidRetur(datoTidRetur);
 
-            String rekning = utleige.genererRekning();
-            ui.skrivUt(rekning);
+                utleige.setHarLevert(true);
+
+                String rekning = utleige.genererRekning();
+                ui.skrivUt(rekning);
+            } else {
+                ui.skrivUt("Ingen utleige på dette kontoret!");
+            }
+
         } else {
-            //TODO skriv ut feilmelding!
-            ui.skrivUt("Ingen utleige på dette kontoret!");
+
+            if (kontor == null) {
+                ui.skrivUt("Ugyldig kontornr! Prøv på nytt.");
+            }
+
+            if (kunde == null) {
+                ui.skrivUt("Ingen kunde med det telefonnummeret! Prøv på nytt.");
+            }
         }
         
     }

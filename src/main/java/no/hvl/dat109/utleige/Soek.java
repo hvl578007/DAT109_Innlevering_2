@@ -28,7 +28,6 @@ public class Soek {
      * @param selskap
      */
     public void gjerEitSoek(Utleigeselskap selskap) {
-        //TODO sjekke om kontor != null
         Utleigekontor kontor = selskap.finnKontor(this.kontorNr);
         List<Character> ledigeGrupper = kontor.finnLedigeUtleigeGrupper();
 
@@ -41,7 +40,12 @@ public class Soek {
      * @return resultatet
      */
     public Resultat hentResultat(int resNr) {
-        return this.resultat.get(resNr-1);
+        try {
+            return this.resultat.get(resNr-1);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        } 
+        
     }
 
     /**
