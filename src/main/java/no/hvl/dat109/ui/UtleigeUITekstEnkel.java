@@ -195,5 +195,12 @@ public class UtleigeUITekstEnkel implements UtleigeUI {
         this.skrivUt("Det har blitt gjort eit utleige:\n" + utleige.toString());
     }
 
+    @Override
+    public int spoerOmEksisterandeKunde() {
+        int svar = JOptionPane.showOptionDialog(null, "Er du ein eksisterande kunde?", "Selskap", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"JA", "NEI"}, "");
+
+        return svar;
+    }
+
     
 }

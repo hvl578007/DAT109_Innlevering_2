@@ -94,13 +94,29 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
             if (resultat != null) {
                 Reservasjon reservasjon = new Reservasjon(soek.getKontorNr(), soek.getDatoTidUtleige(), soek.getTalPaaDagar(), resultat.getPris(), resultat.getUtleigeGruppe());
 
-                Kunde kunde = ui.lagKundeMedInfo();
+                //TODO fiks på skjema!
+                //vil spørje om det er ein kunde frå før nå
+                Kunde kunde = null;
+                do {
+                    int svar = ui.spoerOmEksisterandeKunde();
+                    if (svar == 0) {
+                        String tlf = ui.lesInnTlfNr();
+                        kunde = selskap.finnKunde(tlf);
+                    } else if (svar == 1) {
+                        kunde = ui.lagKundeMedInfo();
+                    }
+                    if (kunde == null) {
+                        ui.skrivUt("Ingen kunde med det tlf! Prøv på nytt.");
+                    }
+                } while(kunde == null);
 
                 kunde.leggTilReservasjon(reservasjon);
 
                 selskap.leggTilKunde(kunde);
 
                 ui.skrivUtKundeReservasjon(kunde, reservasjon);
+
+                setSoek(null);
             } else {
                 ui.skrivUt("Søket hadde ingen resultat! Gjer eit nytt søk på anna kontor!");
             }

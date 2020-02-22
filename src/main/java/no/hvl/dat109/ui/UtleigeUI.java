@@ -85,18 +85,54 @@ public interface UtleigeUI {
      */
     public void visSoekResultat(Soek soek);
     
+    /**
+     * Less inn ein dato og tida
+     * @return objekt av localdatetime
+     */
     public LocalDateTime lesInnDatoTid();
 
+    /**
+     * Les inn eit resultatnummer på eit søk
+     * @param soek
+     * @return nummeret
+     */
     public int lesInnResultatNr(Soek soek);
 
+    /**
+     * Lagar ein kunde med info
+     * @return kunden
+     */
     public Kunde lagKundeMedInfo();
 
+    /**
+     * Skriv ut kunde + reservasjon
+     * @param kunde
+     * @param reservasjon
+     */
     public void skrivUtKundeReservasjon(Kunde kunde, Reservasjon reservasjon);
 
+    /**
+     * Les inn eit telefonnummer
+     * @return tlf
+     */
     public String lesInnTlfNr();
 
+    /**
+     * Les inn info om kortnummeret
+     * @return kortnummeret
+     */
     public String lesInnKortNr();
 
+    /**
+     * Skriv ut ein utleige
+     * @param utleige
+     */
 	public void skrivUtUtleige(Utleige utleige);
+
+    /**
+     * Spør om ein er ein eksisterande kunde
+     * @return 0 om JA, 1 om NEI
+     */
+	public int spoerOmEksisterandeKunde();
 
 }
