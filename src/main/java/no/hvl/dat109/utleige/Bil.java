@@ -1,5 +1,7 @@
 package no.hvl.dat109.utleige;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -8,6 +10,8 @@ import java.util.Random;
  * @author Stian Grønås
  */
 public class Bil {
+
+    public static final List<Character> GYLDIGE_GRUPPER = Arrays.asList('A', 'B', 'C', 'D');
 
     private String registreringsnummer;
     private String merke;

@@ -4,21 +4,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import no.hvl.dat109.Adresse;
 import no.hvl.dat109.kontroller.UtleigeKontroller;
 import no.hvl.dat109.kontroller.UtleigeKontrollerImpl;
-import no.hvl.dat109.utleige.Bil;
-import no.hvl.dat109.utleige.Utleigekontor;
 import no.hvl.dat109.utleige.Utleigeselskap;
 
 
 /**
- * UtleigeGUISwing
+ * Klasse som definerar hovudmenyen - UtleigeGUISwing
+ * @author Stian Grønås
  */
 public class UtleigeGUISwing extends JFrame implements ActionListener, WindowListener{
 
@@ -30,16 +27,22 @@ public class UtleigeGUISwing extends JFrame implements ActionListener, WindowLis
     private UtleigeKontroller kontroller;
 
 
+    /**
+     * Opprettar ein GUI og spør om info om selskapet (tomt selskap)
+     */
     public UtleigeGUISwing() {
         
-        Utleigeselskap utleigeselskap = new Utleigeselskap("testbil", "00000000", new Adresse("testvegen 1", "1234", "fiktiv"));
-        this.kontroller = new UtleigeKontrollerImpl(utleigeselskap);
+        this.kontroller = new UtleigeKontrollerImpl();
 
         opprettKnappar();
 
         opprettFrame();
     }
 
+    /**
+     * Opprettar ein GUI på det gitte selskapet
+     * @param selskap
+     */
     public UtleigeGUISwing(Utleigeselskap selskap) {
         
         this.kontroller = new UtleigeKontrollerImpl(selskap);
@@ -49,6 +52,9 @@ public class UtleigeGUISwing extends JFrame implements ActionListener, WindowLis
         opprettFrame();
     }
 
+    /**
+     * Opprettar hovudframe-en
+     */
     private void opprettFrame() {
         this.setTitle("Bilutleige");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,6 +69,9 @@ public class UtleigeGUISwing extends JFrame implements ActionListener, WindowLis
         setDefaultLookAndFeelDecorated(true);
     }
 
+    /**
+     * Opprettar knappane på frame-en
+     */
     private void opprettKnappar() {
 
         JButton opprettKontorKnapp = new JButton("Opprett nytt kontor");
@@ -114,7 +123,6 @@ public class UtleigeGUISwing extends JFrame implements ActionListener, WindowLis
 
     }
 
-    //TODO i annan klasse?
     @Override
     public void actionPerformed(ActionEvent e) {
         if("opprettBil".equals(e.getActionCommand())) {
@@ -134,7 +142,7 @@ public class UtleigeGUISwing extends JFrame implements ActionListener, WindowLis
             kontroller.reserver();
 
         } else if ("soekOgReserver".equals(e.getActionCommand())) {
-            //TODO
+            //TODO fiks! ny metode i kontroller?
             
         } else if ("hentBil".equals(e.getActionCommand())) {
             System.out.println("Henter ein bil...");
@@ -153,52 +161,6 @@ public class UtleigeGUISwing extends JFrame implements ActionListener, WindowLis
     public void windowClosing(WindowEvent e) {
         System.out.println("Avsluttar programmet...");
     }
-
-
-    public static void main(String[] args) {
-        Utleigeselskap selskap = new Utleigeselskap("Tester", "12345678", new Adresse("Testvegen 1", "1234", "Test"));
-        List<Utleigekontor> kontorar = selskap.getKontorListe();
-
-        Utleigekontor kontor1 = new Utleigekontor(new Adresse("Testvegen 10", "1210", "Testby1"), "11111111");
-        Utleigekontor kontor2 = new Utleigekontor(new Adresse("Testvegen 20", "1220", "Testby2"), "22222222");
-        Utleigekontor kontor3 = new Utleigekontor(new Adresse("Testvegen 30", "1230", "Testby3"), "33333333");
-
-        Bil bil1 = new Bil("AB11111", "Testmerke", "Testmodell", "Blå", 'A', 14000);
-        Bil bil2 = new Bil("AB12222", "Testmerke", "Testmodell", "Blå", 'B', 24000);
-        Bil bil3 = new Bil("AB13333", "Testmerke", "Testmodell", "Blå", 'C', 34000);
-        Bil bil4 = new Bil("AB14444", "Testmerke", "Testmodell", "Blå", 'D', 44000);
-        Bil bil5 = new Bil("AB15555", "Testmerke", "Testmodell", "Blå", 'A', 54000);
-        Bil bil6 = new Bil("AB16666", "Testmerke", "Testmodell", "Blå", 'B', 64000);
-        Bil bil7 = new Bil("AB17777", "Testmerke", "Testmodell", "Blå", 'C', 74000);
-        Bil bil8 = new Bil("AB18888", "Testmerke", "Testmodell", "Blå", 'D', 84000);
-
-        Bil bil9 = new Bil("AB19999", "Testmerke", "Testmodell", "Blå", 'A', 94000);
-        Bil bil10 = new Bil("AB20000", "Testmerke", "Testmodell", "Blå", 'B', 104000);
-        Bil bil11 = new Bil("AB21111", "Testmerke", "Testmodell", "Blå", 'C', 114000);
-        Bil bil12 = new Bil("AB22222", "Testmerke", "Testmodell", "Blå", 'D', 124000);
-
-        kontor1.getBilar().add(bil1);
-        kontor1.getBilar().add(bil2);
-        kontor1.getBilar().add(bil3);
-        kontor1.getBilar().add(bil4);
-        kontor1.getBilar().add(bil5);
-        kontor1.getBilar().add(bil6);
-        kontor1.getBilar().add(bil7);
-        kontor1.getBilar().add(bil8);
-
-        kontor2.getBilar().add(bil9);
-        kontor2.getBilar().add(bil10);
-        kontor3.getBilar().add(bil11);
-        kontor3.getBilar().add(bil12);
-
-        kontorar.add(kontor1);
-        kontorar.add(kontor2);
-        kontorar.add(kontor3);
-
-
-        new UtleigeGUISwing(selskap);
-    }
-
     
     @Override
     public void windowOpened(WindowEvent e) {}

@@ -16,13 +16,14 @@ import no.hvl.dat109.utleige.Utleigekontor;
 import no.hvl.dat109.utleige.Utleigeselskap;
 
 /**
- * UtleigeUITekstEnkel
+ * Klasse som implementerar UtleigeUI-interfacet
+ * @author Stian Grønås
  */
 public class UtleigeUITekstEnkel implements UtleigeUI {
 
     @Override
     public void skrivUt(String melding) {
-        JOptionPane.showConfirmDialog(null, melding);
+        JOptionPane.showMessageDialog(null, melding, "Selskap", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
@@ -33,13 +34,18 @@ public class UtleigeUITekstEnkel implements UtleigeUI {
 
     @Override
     public int lesInnInteger(String melding) {
-        String inn = JOptionPane.showInputDialog(null, melding);
-        int tilbake = Integer.MIN_VALUE;
-        try {
-            tilbake = Integer.parseInt(inn);
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
+        boolean gyldig = false;
+        int tilbake = 0;
+        do {
+            String inn = JOptionPane.showInputDialog(null, melding);
+            try {
+                tilbake = Integer.parseInt(inn);
+                gyldig = true;
+            } catch (Exception e) {
+                this.skrivUt("Ikkje eit tal! Skriv inn på nytt");
+            }
+        } while (!gyldig);
+        
         return tilbake;
     }
 
@@ -48,6 +54,12 @@ public class UtleigeUITekstEnkel implements UtleigeUI {
         String inn = JOptionPane.showInputDialog(null, melding);
         inn = inn.toUpperCase();
         char tilbake = inn.charAt(0);
+        while (!Bil.GYLDIGE_GRUPPER.contains(tilbake)) {
+            this.skrivUt("Ugyldig character!");
+            inn = JOptionPane.showInputDialog(null, melding);
+            inn = inn.toUpperCase();
+            tilbake = inn.charAt(0);
+        }
         return tilbake;
     }
 
@@ -107,31 +119,52 @@ public class UtleigeUITekstEnkel implements UtleigeUI {
 
     @Override
     public void visSoekResultat(Soek soek) {
-        List<Resultat> res = soek.getResultat();
-        String ut = "";
-        for (Resultat r : res) {
-            ut += r.toString() + "\n";
+        if (soek != null) {
+            List<Resultat> res = soek.getResultat();
+            String ut = "";
+            for (Resultat r : res) {
+                ut += r.toString() + "\n";
+            }
+            this.skrivUt(ut);
+        } else {
+            this.skrivUt("Tomt søke-objekt");
         }
-        this.skrivUt(ut);
     }
 
     @Override
     public LocalDateTime lesInnDatoTid() {
-        //TODO fiks slik at ein kan velje dato? fiks...?
-        //String tidStr = lesInnString("Skriv inn dato/tid:, ISO-format");
-        //LocalDateTime tid = LocalDateTime.parse(tidStr);
-        LocalDateTime tid = LocalDateTime.now();
+        int svar = JOptionPane.showOptionDialog(null, "Bruke dato/tid now()? (JA)\nSkrive inn tid manuelt? (MANUELT)", "Selskap", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"JA", "MANUELT"}, "");
+        LocalDateTime tid = null;
+        if (svar == 0) {
+            tid = LocalDateTime.now();
+        } else {
+            boolean gyldig = false;
+            do {
+                String tidStr = lesInnString("Skriv inn dato/tid:, ISO-format");
+                try {
+                    tid = LocalDateTime.parse(tidStr);
+                    gyldig = true;
+                } catch (Exception e) {
+                    this.skrivUt("Ugyldig dato - prøv på nytt!");
+                }
+            } while (!gyldig);
+        }
         return tid;
     }
 
     @Override
     public int lesInnResultatNr(Soek soek) {
-        return this.lesInnInteger("Skriv inn resultatnr 1-4");
+        int talPaaResultat = soek.getResultat().size();
+        int nr = this.lesInnInteger("Skriv inn resultatnr (1 opp til " + talPaaResultat + ")");
+        while (nr < 1 || nr > talPaaResultat) {
+            this.skrivUt("Ugyldig resultatnummer, skriv inn på nytt!");
+            nr = this.lesInnInteger("Skriv inn resultatnr (1 opp til " + talPaaResultat + ")");
+        }
+        return nr;
     }
 
     @Override
     public Kunde lagKundeMedInfo() {
-        // TODO Auto-generated method stub
         String fornamn = lesInnString("Skriv inn fornamn");
         String etternamn = lesInnString("Skriv inn etternamn");
         String tlf = lesInnTlfNr();
@@ -142,11 +175,13 @@ public class UtleigeUITekstEnkel implements UtleigeUI {
 
     @Override
     public String lesInnTlfNr() {
+        //TODO sjekke at det er 8 sifre?
         return this.lesInnString("Skriv inn tlf:");
     }
 
     @Override
     public String lesInnKortNr() {
+        //TODO "lagre på sikker måte.."
         return this.lesInnString("Skriv inn kortnr:");
     }
 

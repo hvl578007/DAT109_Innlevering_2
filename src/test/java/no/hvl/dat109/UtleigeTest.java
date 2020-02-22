@@ -23,7 +23,6 @@ import no.hvl.dat109.utleige.Utleigeselskap;
  */
 public class UtleigeTest {
 
-    //TODO opprett noko selskap + kontor + bilar for å teste diverse i!
     Utleigeselskap selskap;
     List<Utleigekontor> kontorar;
     List<Kunde> kundar;
