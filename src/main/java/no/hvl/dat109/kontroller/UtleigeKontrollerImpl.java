@@ -50,7 +50,6 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
 
         selskap.leggTilBilPaaKontor(kontorNr, bil);
 
-        //TODO skriv ut bilinfo
         ui.skrivUt("Oppretta bil: " + bil.toString());
     }
 
@@ -59,7 +58,6 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
         Utleigekontor kontor = ui.lagKontorMedInfo();
         this.selskap.leggTilKontor(kontor);
 
-        //TODO skriv ut kontorinfo
         ui.skrivUt("Oppretta kontor: " + kontor.toString());
     }
 
@@ -67,12 +65,20 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
     public void soek() {
         Soek soek = ui.lesInnSoek();
 
-        soek.gjerEitSoek(this.selskap);
+        //TODO oppdater sekvensskjema!
+        Utleigekontor kontor = this.selskap.finnKontor(soek.getKontorNr());
 
-        //vis resultat?
-        ui.visSoekResultat(soek);
+        if (kontor != null) {
+            soek.gjerEitSoek(kontor);
 
-        this.setSoek(soek);
+            //vis resultat?
+            ui.visSoekResultat(soek);
+
+            this.setSoek(soek);
+        } else {
+            ui.skrivUt("Ugyldig kontornummer på søket! Prøv på nytt!");
+        }
+        
     }
 
     @Override
