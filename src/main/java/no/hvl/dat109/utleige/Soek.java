@@ -27,8 +27,8 @@ public class Soek {
      * Gjer eit søk i selskapet
      * @param selskap
      */
-    public void gjerEitSoek(Utleigeselskap selskap) {
-        Utleigekontor kontor = selskap.finnKontor(this.kontorNr);
+    public void gjerEitSoek(Utleigekontor kontor) {
+        
         List<Character> ledigeGrupper = kontor.finnLedigeUtleigeGrupper();
 
         opprettResultat(ledigeGrupper);

@@ -12,7 +12,8 @@ import no.hvl.dat109.utleige.Soek;
 import no.hvl.dat109.utleige.Utleigekontor;
 
 /**
- * UtleigeGUISwingInput
+ * Klasse som testar det med å få gui der ein kan skriv inn på diverse tekstfelt.
+ * Berre testing... Ikkje ferdig.
  * @author Stian Grønås
  */
 public class UtleigeGUISwingInput extends JFrame implements ActionListener, WindowListener {
