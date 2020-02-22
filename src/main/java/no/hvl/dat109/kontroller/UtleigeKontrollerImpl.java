@@ -65,7 +65,6 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
     public void soek() {
         Soek soek = ui.lesInnSoek();
 
-        //TODO oppdater sekvensskjema!
         Utleigekontor kontor = this.selskap.finnKontor(soek.getKontorNr());
 
         if (kontor != null) {
@@ -94,7 +93,6 @@ public class UtleigeKontrollerImpl implements UtleigeKontroller {
             if (resultat != null) {
                 Reservasjon reservasjon = new Reservasjon(soek.getKontorNr(), soek.getDatoTidUtleige(), soek.getTalPaaDagar(), resultat.getPris(), resultat.getUtleigeGruppe());
 
-                //TODO fiks på skjema!
                 //vil spørje om det er ein kunde frå før nå
                 Kunde kunde = null;
                 do {
