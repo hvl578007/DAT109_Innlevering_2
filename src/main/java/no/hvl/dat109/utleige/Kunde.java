@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import no.hvl.dat109.Adresse;
-import no.hvl.dat109.utleige.Reservasjon;
 
 /**
  * Klasse som definerar ein kunde

@@ -12,7 +12,8 @@ import no.hvl.dat109.utleige.Utleigekontor;
 import no.hvl.dat109.utleige.Utleigeselskap;
 
 /**
- * UtleigeUI
+ * Interface UtleigeUI
+ * @author Stian Grønås
  */
 public interface UtleigeUI {
 

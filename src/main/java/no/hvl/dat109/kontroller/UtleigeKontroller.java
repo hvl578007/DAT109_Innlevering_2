@@ -1,11 +1,10 @@
 package no.hvl.dat109.kontroller;
 
 /**
- * UtleigeKontroller
+ * Inteface UtleigeKontroller
+ * @author
  */
 public interface UtleigeKontroller {
-
-    //TODO lage 
 
     /**
      * Oppretter ein ny bil på eit kontor\n

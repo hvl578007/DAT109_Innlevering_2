@@ -6,7 +6,6 @@ import java.util.Random;
 
 /**
  * Klasse som definerar ein bil
- * 
  * @author Stian Grønås
  */
 public class Bil {

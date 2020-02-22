@@ -22,8 +22,6 @@ public class Main {
 
         int svar = JOptionPane.showOptionDialog(null, "Bruke eit testselskap? (JA)\nOpprette eit nytt? (NYTT)", "Selskap?", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"JA", "NYTT"}, "");
 
-        System.out.println(svar);
-
         if (svar == 0) {
             //opprettar eit testselskap med info allereie der
             UtleigeGUISwing gui = new UtleigeGUISwing(opprettTestSelskap());
@@ -33,6 +31,10 @@ public class Main {
         }
     }
 
+    /**
+     * Opprettar eit testselskap med diverse info allereie der
+     * @return selskapet
+     */
     private static Utleigeselskap opprettTestSelskap() {
         Utleigeselskap selskap = new Utleigeselskap("Tester", "00000000", new Adresse("Testvegen 1", "1234", "Test"));
         List<Utleigekontor> kontorar = selskap.getKontorListe();
